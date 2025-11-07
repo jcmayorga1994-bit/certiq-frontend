@@ -1,4 +1,4 @@
-# saber+
+# CertiQ
 
 ## Project setup
 ```
