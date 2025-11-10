@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <v-navigation-drawer style="background: linear-gradient(185deg, rgb(45 43 43) 0%, rgb(94 87 87) 100%);" v-model="drawer" dark app>
-      <v-list dense>        
-        Aqui va el Side Menu
+    <v-navigation-drawer style="background: linear-gradient(185deg, rgb(45 43 43) 0%, rgb(94 87 87) 100%);"
+      v-model="drawer" dark app>
+      <v-list density="compact">
+        <Test />
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
@@ -13,22 +14,24 @@
 
     <v-app-bar style="background: #6366F1;
 background: linear-gradient(90deg,rgba(99, 102, 241, 1) 0%, rgba(67, 56, 202, 1) 100%);" dense app>
-      <v-app-bar-nav-icon
-        color="white"
-        @click="drawer = drawer ? false : true"
-      ></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text font-weight-bold"
-        >
-        <v-icon dark>
-          fa-feather-alt
-        </v-icon>
-        TITULO
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-title class="white--text" >
-        <!-- {{ user.name }} {{ user.pather_lastname }} {{ user.mother_lastname }} -->
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon color="white" @click="drawer = drawer ? false : true"></v-app-bar-nav-icon>
+      </template>
+      <template v-slot:title>
+        <v-toolbar-title class="text-white font-weight-bold">
+          <v-icon dark>
+            mdi-certificate
+          </v-icon>
+          TITULO
+        </v-toolbar-title>
+      </template>
+      <template v-slot:append>
+        <v-toolbar-title class="text-white">
+          <!-- {{ user.name }} {{ user.pather_lastname }} {{ user.mother_lastname }} -->
           Nombre Usuario
-      </v-toolbar-title>
+        </v-toolbar-title>
+      </template>
+
     </v-app-bar>
     <v-main>
       <v-container fluid>
@@ -51,9 +54,13 @@ background: linear-gradient(90deg,rgba(99, 102, 241, 1) 0%, rgba(67, 56, 202, 1)
   </v-app>
 </template>
 <script lang="ts">
+import Test from "@/components/sideMenus/Test.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "MainTemplate",
+  components: {
+    Test,
+  },
   data() {
     return {
       drawer: true,
@@ -67,6 +74,4 @@ export default defineComponent({
   color: white;
   background: #bf1717;
 }
-
-
 </style>
