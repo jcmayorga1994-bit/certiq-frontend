@@ -7,7 +7,6 @@
       v-model="drawer" 
       app
     >
-      <!-- ELIMINA el v-list de aquí -->
       <SelectedCountry />
       <SideMenuPublic />
       

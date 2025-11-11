@@ -1,9 +1,8 @@
 <template>
   <v-menu>
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" variant="outlined" size="small" class="text-white" block>
-        <span class="text-truncate"> <img :src="selectedItem?.flag" width="30" height="24" alt="Ucrania"> {{ selectedItem?.text || 'Seleccionar opción' }}</span>
-        <v-icon end size="small">mdi-chevron-down</v-icon>
+      <v-btn v-bind="props" block>
+        <span class="text-truncate"> <img v-if="selectedItem" :src="selectedItem?.flag" width="30" height="24" > {{ selectedItem?.text || 'Seleccionar opción' }}</span>
       </v-btn>
     </template>
 
@@ -26,7 +25,6 @@ export default defineComponent({
   name: "SelectedCountry",
   data() {
     return {
-
       selectedItem: null,
       items: [
         { value: 1, text: 'Chile', flag: 'https://flagcdn.com/112x84/cl.webp' },
@@ -34,6 +32,10 @@ export default defineComponent({
         { value: 3, text: 'EEUU', flag: 'https://flagcdn.com/112x84/es.webp' }
       ]
     }
+  },
+  mounted() {
+    this.selectedItem = this.items[0];
+    this.isOpen = false;
   },
   methods: {
     selectItem(item) {

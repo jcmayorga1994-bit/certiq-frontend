@@ -3,14 +3,20 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'LoginView',
-    component: () => import(/* webpackChunkName: "Login" */ '@/views/Login.vue')
+    name: 'HomePublic',
+    component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/HomePublic.vue')
   },
   {
-    path: '/MyCourses',
-    name: 'MyCourses',
-    component: () => import(/* webpackChunkName: "MyCourses" */ '@/views/MyCourses.vue')
+    path: '/Login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "chunk-LoginView" */ '@/views/Login.vue')
   },
+  // ❌ Ruta 404 (fallback)
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   name: 'notfound',
+  //   component: () => import(/* webpackChunkName: "notfound" */ '../views/NotFoundView.vue')
+  // }
   // {
   //   path: '/about',
   //   name: 'about',
