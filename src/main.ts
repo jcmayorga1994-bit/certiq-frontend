@@ -3,26 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vue3GoogleLogin from 'vue3-google-login';
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 // Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css'
+import vuetify from './plugins/vuetify'
+import 'vuetify/styles' 
 
-const vuetify = createVuetify({
-    components,
-    directives,
-    icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-            mdi,
-        },
-    },
-})
 createApp(App).
     use(vuetify).
     use(store).
