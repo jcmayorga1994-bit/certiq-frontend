@@ -47,57 +47,37 @@
     </v-dialog>
 </template>
 
-<script lang="ts">
-import { validationRules } from '@/utils/validationRules';
-import { defineComponent } from 'vue';
-import { googleTokenLogin } from 'vue3-google-login';
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { validationRules } from '@/utils/validationRules'
+import { googleTokenLogin } from 'vue3-google-login'
 
-export default defineComponent({
-    name: 'LoginView',
-    data() {
-        return {
-            dataLogin: {
-                email: null as string | null,
-                password: null as string | null,
-            },
-            rules: validationRules,
-            loading: false,
-            googleLoading: false,
-            isFormValid: false
-        }
-    },
-    methods: {
-        submit() {
-            if (this.isFormValid) {
-                this.loading = true;
-                this.$router.push({ name: "Dashboard" });
-                setTimeout(() => {
-                    this.loading = false;
-                }, 2000);
-            }
-        },
+const router = useRouter()
 
-        async loginWithGoogle() {
-            try {
-                this.googleLoading = true;
+const dataLogin = ref({ email: '', password: '' })
+const rules = validationRules
+const loading = ref(false)
+const googleLoading = ref(false)
+const isFormValid = ref(false)
 
-                const response = await googleTokenLogin();
+function submit() {
+  if (isFormValid.value) {
+    loading.value = true
+    router.push({ name: 'Dashboard' })
+    loading.value = false
+  }
+}
 
-                console.log('Google Login Success:', response);
-                console.log('Access Token:', response.access_token);
-
-                // Aquí envías el token a tu backend
-                // await this.sendGoogleTokenToBackend(response.access_token);
-
-                // O decodifica el JWT para obtener info del usuario
-                // const userData = this.decodeJWT(response.access_token);
-
-            } catch (error) {
-                console.error('Error en Google Login:', error);
-            } finally {
-                this.googleLoading = false;
-            }
-        }
-    }
-});
+async function loginWithGoogle() {
+  try {
+    googleLoading.value = true
+    const response = await googleTokenLogin()
+    console.log('Google Login Success:', response)
+  } catch (error) {
+    console.error('Error en Google Login:', error)
+  } finally {
+    googleLoading.value = false
+  }
+}
 </script>

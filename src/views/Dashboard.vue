@@ -1,6 +1,5 @@
 <template>
   <MainTemplate>
-
     <template v-slot:container>
       <div class="text-center">
         <h1>Resumen de tu actividad y progreso</h1>
