@@ -2,7 +2,12 @@
   <v-menu>
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props" block>
-        <span class="text-truncate"> <img v-if="selectedItem" :src="selectedItem?.flag" width="30" height="24" > {{ selectedItem?.text || 'Seleccionar opción' }}</span>
+        <template v-slot:prepend>
+          <img v-if="selectedItem" :src="selectedItem?.flag" width="30" height="24" >
+        </template>
+        <span>
+          {{ selectedItem?.text || 'Seleccionar opción' }}
+        </span>
       </v-btn>
     </template>
 

@@ -30,9 +30,7 @@
       </v-toolbar-title>
       <template v-slot:append>
         <span class="mr-4">
-          <v-btn color="primary" rounded="xl" prepend-icon="mdi-login" variant="flat">
-            Ingresar
-          </v-btn>
+          <modal-login />
         </span>
       </template>
     </v-app-bar>
@@ -52,6 +50,7 @@
 </template>
 
 <script lang="ts">
+import ModalLogin from "@/components/general/ModalLogin.vue";
 import SelectedCountry from "@/components/sideMenus/SelectedCountry.vue";
 import SideMenuPublic from "@/components/sideMenus/SideMenuPublic.vue";
 import { defineComponent } from "vue";
@@ -60,7 +59,8 @@ export default defineComponent({
   name: "MainTemplate",
   components: {
     SelectedCountry,
-    SideMenuPublic
+    SideMenuPublic,
+    ModalLogin
   },
   data() {
     return {

@@ -7,9 +7,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/HomePublic.vue')
   },
   {
-    path: '/Login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "chunk-LoginView" */ '@/views/Login.vue')
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "chunk-LoginView" */ '@/views/Dashboard.vue')
   },
   // ❌ Ruta 404 (fallback)
   // {
