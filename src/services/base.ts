@@ -31,7 +31,7 @@ class BaseService {
   }
 
   async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const response: AxiosResponse<T> = await this.api.get(url, config);
+    const response: AxiosResponse<T> = await this.api.get(url, config);    
     return response.data;
   }
 
