@@ -34,7 +34,7 @@ export default defineComponent({
       items: [
         { value: 1, text: 'Chile', flag: 'https://flagcdn.com/112x84/cl.webp' },
         { value: 2, text: 'Uruguay', flag: 'https://flagcdn.com/112x84/uy.webp' },
-        { value: 3, text: 'EEUU', flag: 'https://flagcdn.com/112x84/es.webp' }
+        { value: 3, text: 'EEUU', flag: 'https://flagcdn.com/112x84/us.webp' }
       ]
     }
   },

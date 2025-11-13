@@ -8,6 +8,14 @@ import vue3GoogleLogin from 'vue3-google-login';
 import vuetify from './plugins/vuetify'
 import 'vuetify/styles' 
 
+// const appVersion = process.env.VUE_APP_GLOBAL_VERSION;
+// const browserVersion = window.localStorage.getItem("appVersion");
+
+// if (appVersion !== browserVersion) {
+//   window.localStorage.setItem("appVersion", appVersion as string);
+//   window.location.reload();
+// }
+
 createApp(App).
     use(vuetify).
     use(store).

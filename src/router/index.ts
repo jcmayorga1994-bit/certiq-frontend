@@ -1,16 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { routes as administrator } from './administrator'
 const routes = [
   {
     path: '/',
     name: 'HomePublic',
     component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/HomePublic.vue')
   },
-  {
-    path: '/Dashboard',
-    name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "chunk-LoginView" */ '@/views/Dashboard.vue')
-  },
+  ...administrator
   // ❌ Ruta 404 (fallback)
   // {
   //   path: '/:pathMatch(.*)*',
