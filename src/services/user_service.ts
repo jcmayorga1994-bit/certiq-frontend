@@ -9,9 +9,9 @@ class UserService extends BaseService {
   }
 
   async getAll(): Promise<User[]> {
-    const data = await this.get<User[]>(`/${this.ENTITY_NAME}/index-public`);
+    const data = await this.get<User[]>(`/public/${this.ENTITY_NAME}/index-public`);
     console.log('INDEX', data);
-    
+
     return data;
   }
 
@@ -35,4 +35,4 @@ class UserService extends BaseService {
   }
 }
 
-export const userService = new UserService();
+export const USER_SERVICE = new UserService();

@@ -1,13 +1,14 @@
 // src/models/user.ts
 export interface User {
-  id: number;
+  id?: number | null;
+  password?: string | null;
   name: string;
   email: string;
   role?: string;
 }
 
 export class UserModel implements User {
-  id!: number;
+  id!: number | null;
   name!: string;
   email!: string;
   role?: string;

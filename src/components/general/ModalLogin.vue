@@ -35,6 +35,12 @@
                         color="grey-darken-1" prepend-icon="mdi-google">
                         Continuar con Google
                     </v-btn>
+                    <p class="text-center">
+                        <modal-register></modal-register>                       
+                    </p>                    
+                    <p class="text-center">                     
+                        <a href="">¿Olvidó su contraseña?</a>
+                    </p>                    
                 </v-card-text>
 
                 <v-card-actions>
@@ -52,6 +58,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { validationRules } from '@/utils/validationRules'
 import { googleTokenLogin } from 'vue3-google-login'
+import ModalRegister from './ModalRegister.vue'
 
 const router = useRouter()
 
