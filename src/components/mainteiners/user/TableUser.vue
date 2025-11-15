@@ -9,10 +9,7 @@
   ></v-data-table-server>
 </template>
 <script setup>
-  import { useUsers } from '@/composables/userUsers';
-
-  const { users, loading } = useUsers();
-  console.log('USERS',users);
-  
+import { ref } from 'vue'
+  const itemsPerPage = ref([])
 
 </script>

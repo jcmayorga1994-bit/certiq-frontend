@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useAuthStore } from '@/store/auth'
 
 class BaseService {
   protected api: AxiosInstance;
@@ -24,14 +25,21 @@ class BaseService {
     this.api.interceptors.response.use(
       (response) => response,
       (error) => {
-        console.error('Error HTTP:', error.response?.data || error.message);
-        throw error;
+        if (error.response?.status === 401) {
+          const authStore = useAuthStore()
+          authStore.logout()
+          window.location.href = '/login'
+          throw error;
+        }else{
+          console.error('Error HTTP:', error.response?.data || error.message);
+          throw error;
+        }
       }
     );
   }
 
   async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const response: AxiosResponse<T> = await this.api.get(url, config);    
+    const response: AxiosResponse<T> = await this.api.get(url, config);
     return response.data;
   }
 

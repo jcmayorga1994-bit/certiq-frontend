@@ -24,12 +24,14 @@ export const routes = [
             {
                 path: 'users',
                 name: 'admin.users',
-                component: () => import('@/views/mainteiners/UserView.vue')
+                component: () => import('@/views/mainteiners/UserView.vue'),
+                meta: { requiresAuth: false }
             },
             {
                 path: 'upload',
                 name: 'admin.upload',
-                component: () => import('@/views/TestUpload.vue')
+                component: () => import('@/views/TestUpload.vue'),
+                meta: { requiresAuth: false }
             }
         ]
     }

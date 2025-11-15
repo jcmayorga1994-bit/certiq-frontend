@@ -54,7 +54,7 @@ import { AUTH_SERVICE } from '@/services/auth_service'
 const rules = validationRules
 const router = useRouter()
 
-const data_post_user = ref<User>({
+const data_post_user = ref({
   name: '',
   email: '',
   password: '',

@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vue3GoogleLogin from 'vue3-google-login';
-
-// Vuetify
+import { createPinia } from 'pinia'
+import { useAuthStore } from './store/auth'
 import vuetify from './plugins/vuetify'
 import 'vuetify/styles' 
 
@@ -15,13 +15,24 @@ import 'vuetify/styles'
 //   window.localStorage.setItem("appVersion", appVersion as string);
 //   window.location.reload();
 // }
+const app = createApp(App)
+const pinia = createPinia()
 
-createApp(App).
-    use(vuetify).
-    use(store).
-    use(router).
-    use(vue3GoogleLogin, {
+app.use(vuetify)
+app.use(store)
+app.use(router)
+app.use(pinia)
+app.use(vue3GoogleLogin, {
         clientId: '628906036129-gs3d52h8hfp9rfdp9s2fib8muq4l85o4.apps.googleusercontent.com'
-    }).
-    mount('#app')
+    })
 
+// Inicializar autenticación desde localStorage
+const authStore = useAuthStore()
+authStore.initAuth()
+
+// Si hay token, verificar que sea válido
+if (authStore.isAuthenticated) {
+  authStore.fetchUser()
+}
+
+app.mount('#app')
