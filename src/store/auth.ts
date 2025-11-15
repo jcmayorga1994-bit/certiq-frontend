@@ -24,24 +24,23 @@ export const useAuthStore = defineStore('auth', {
     },
 
     actions: {
-        async login(email: string, password: string) {
+        async login({ email, password }: { email: string; password: string }) {
             try {
                 const response = await AUTH_SERVICE.login({
                     email,
                     password,
-                })
-
-                if (response.data.success) {
-                    this.token = response.data.token
-                    this.user = response.data.user
+                })                
+                if (response.success) {
+                    this.token = response.token
+                    this.user = response.user
                     this.isAuthenticated = true
 
                     // Guardar en localStorage
-                    localStorage.setItem('token', response.data.token)
-                    localStorage.setItem('user', JSON.stringify(response.data.user))
+                    localStorage.setItem('token', response.token)
+                    localStorage.setItem('user', JSON.stringify(response.user))
 
                     // Configurar axios para usar el token
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
 
                     return { success: true }
                 }
@@ -56,14 +55,14 @@ export const useAuthStore = defineStore('auth', {
         async register(data: { name: string; email: string; password: string; password_confirmation: string }) {
             try {
                 const response = await AUTH_SERVICE.register(data);
-                if (response.data.success) {
-                    this.token = response.data.token
-                    this.user = response.data.user
+                if (response.success) {
+                    this.token = response.token
+                    this.user = response.user
                     this.isAuthenticated = true
 
-                    localStorage.setItem('token', response.data.token)
-                    localStorage.setItem('user', JSON.stringify(response.data.user))
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+                    localStorage.setItem('token', response.token)
+                    localStorage.setItem('user', JSON.stringify(response.user))
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
 
                     return { success: true }
                 }
@@ -92,8 +91,8 @@ export const useAuthStore = defineStore('auth', {
         async fetchUser() {
             try {
                 const response = await AUTH_SERVICE.me();
-                if (response.data.success) {
-                    this.user = response.data.user
+                if (response.success) {
+                    this.user = response.user
                     this.isAuthenticated = true
                     return { success: true }
                 }

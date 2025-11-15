@@ -1,15 +1,35 @@
 <template>
   <v-data-table-server
-    v-model:items-per-page="itemsPerPage"
+    :items="items"
     :headers="headers"
-    :items="serverItems"
-    :items-length="totalItems"
+    :items-length="total"
     :loading="loading"
     item-value="name"
-  ></v-data-table-server>
+    v-model:items-per-page="itemsPerPage"
+  >
+  </v-data-table-server>
 </template>
-<script setup>
-import { ref } from 'vue'
-  const itemsPerPage = ref([])
 
+<script setup>
+import { USER_SERVICE } from '@/services/user_service';
+import { ref, onMounted } from 'vue';
+
+const loading = ref(false);
+const items = ref([]);
+const total = ref(0);
+const itemsPerPage = ref(10); // Número, no arreglo
+
+const headers = [
+  { title: 'Name', key: 'name' }
+];
+
+onMounted(async () => {
+  loading.value = true;
+
+  const response = await USER_SERVICE.getAll();
+  items.value = response.data;   // asumiendo user_service devuelve { data, total }
+  total.value = response.total;
+
+  loading.value = false;
+});
 </script>

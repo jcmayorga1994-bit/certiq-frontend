@@ -19,7 +19,7 @@
                 </v-card-item>
 
                 <v-card-text>
-                    <v-form v-model="isFormValid" validate-on="submit lazy" @submit.prevent="submit">
+                    <v-form v-model="isFormValid" validate-on="submit lazy" @submit.prevent="handleLogin">
                         <v-text-field v-model="dataLogin.email" :rules="rules.requiredEmail"
                             label="Correo Electronico"></v-text-field>
                         <v-text-field v-model="dataLogin.password" :rules="rules.requiredPassword" label="Contraseña"
@@ -59,6 +59,8 @@ import { useRouter } from 'vue-router'
 import { validationRules } from '@/utils/validationRules'
 import { googleTokenLogin } from 'vue3-google-login'
 import ModalRegister from './ModalRegister.vue'
+import { useAuthStore } from '@/store/auth'
+const authStore = useAuthStore()
 
 const router = useRouter()
 
@@ -67,15 +69,25 @@ const rules = validationRules
 const loading = ref(false)
 const googleLoading = ref(false)
 const isFormValid = ref(false)
+const errorMessage = ref('')
+const errors = ref<{ [key: string]: string }>({})
 
-function submit() {
-  if (isFormValid.value) {
-    loading.value = true
-    router.push({ name: 'Dashboard' })
-    loading.value = false
+
+const handleLogin = async () => {
+  loading.value = true
+  errorMessage.value = ''
+  errors.value = {}
+
+  const result = await authStore.login(dataLogin.value)
+
+  loading.value = false
+
+  if (result?.success) {
+    router.push({ name: 'admin.users' })
+  } else {
+    errorMessage.value = result?.message || 'Error al iniciar sesión'
   }
 }
-
 async function loginWithGoogle() {
   try {
     googleLoading.value = true

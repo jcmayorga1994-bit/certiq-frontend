@@ -9,9 +9,7 @@ class UserService extends BaseService {
   }
 
   async getAll(): Promise<User[]> {
-    const data = await this.get<User[]>(`/public/${this.ENTITY_NAME}/index-public`);
-    console.log('INDEX', data);
-
+    const data = await this.get<User[]>(`/${this.ENTITY_NAME}`);
     return data;
   }
 
