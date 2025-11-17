@@ -9,7 +9,8 @@
       style="background: linear-gradient(185deg, rgb(45 43 43) 0%, rgb(94 87 87) 100%);"
     >
       <SelectedCountry />
-      <SideMenuPublic v-if="authStore.isAuthenticated" />
+      <SideMenuUser v-if="authStore.isAuthenticated" />
+      <SideMenuPublic v-else />
 
       <template #append>
         <v-list-item @click="handleLogout" link>
@@ -69,6 +70,7 @@ import SelectedCountry from "@/components/sideMenus/SelectedCountry.vue";
 import SideMenuPublic from "@/components/sideMenus/SideMenuPublic.vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/store/auth";
+import SideMenuUser from "@/components/sideMenus/SideMenuUser.vue";
 
 const router = useRouter();
 const authStore = useAuthStore();
