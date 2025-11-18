@@ -1,5 +1,5 @@
 import BaseService from './base';
-import { User, UserModel } from '@/models/user';
+import { User } from '@/models/user';
 
 interface auth {
     email: string,
@@ -25,28 +25,40 @@ class AuthService extends BaseService {
     }
 
     async register(user: Omit<User, 'id'>): Promise<response_register> {
-        const data = await this.post<response_register>(`/public/${this.ENTITY_NAME}/register`, user);
-        return data;
+        try {            
+            const data = await this.post<response_register>(`/public/${this.ENTITY_NAME}/register`, user);
+            return data;
+        } catch (error) {
+            this.handleApiError(error, this.ENTITY_NAME, '');
+            throw error;
+        }
     }
     async login(auth: auth): Promise<response_auth> {
-        const data = await this.post<response_auth>(`/public/${this.ENTITY_NAME}/login`, auth);
-        return data;
+        try {
+            const data = await this.post<response_auth>(`/public/${this.ENTITY_NAME}/login`, auth);
+            return data;
+        } catch (error) {
+            this.handleApiError(error, this.ENTITY_NAME, '');
+            throw error;
+        }
     }
-    async me(): Promise<{
-
-        success: string,
-        user: User
-
-    }> {
-        const data = await this.get<{
-            success: string,
-            user: User
-        }>(`/${this.ENTITY_NAME}/me`);
-        return data;
+    async me(): Promise<{ success: string, user: User }> {
+        try {
+            const data = await this.get<{ success: string, user: User }>(`/${this.ENTITY_NAME}/me`);
+            return data;
+        } catch (error) {
+            this.handleApiError(error, this.ENTITY_NAME, '');
+            throw error;
+        }
     }
     async logout(): Promise<any> {
-        const data = await this.get<any>(`/${this.ENTITY_NAME}/logout`);
-        return data;
+        try {
+            const data = await this.get<any>(`/${this.ENTITY_NAME}/logout`);
+            return data;
+        } catch (error) {
+            this.handleApiError(error, this.ENTITY_NAME, '');
+            throw error;
+        }
     }
 }
 

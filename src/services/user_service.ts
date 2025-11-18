@@ -1,5 +1,5 @@
 import BaseService from './base';
-import { User, UserModel } from '@/models/user';
+import { User } from '@/models/user';
 
 class UserService extends BaseService {
   private readonly ENTITY_NAME = 'user';
@@ -9,27 +9,53 @@ class UserService extends BaseService {
   }
 
   async getAll(): Promise<User[]> {
-    const data = await this.get<User[]>(`/${this.ENTITY_NAME}`);
-    return data;
+    try {
+      const data = await this.get<User[]>(`/${this.ENTITY_NAME}`);
+      return data;
+    } catch (error) {
+      this.handleApiError(error, this.ENTITY_NAME, 'obtener todos los usuarios');
+      throw error;
+    }
   }
 
-  async getById(id: number): Promise<UserModel> {
-    const data = await this.get<User>(`/${this.ENTITY_NAME}/${id}`);
-    return new UserModel(data);
+  async getById(id: number): Promise<User> {
+    try {
+      const data = await this.get<User>(`/${this.ENTITY_NAME}/${id}`);
+      return data;
+    } catch (error) {
+      this.handleApiError(error, this.ENTITY_NAME, `obtener usuario con ID ${id}`);
+      throw error;
+    }
   }
 
-  async create(user: Omit<User, 'id'>): Promise<UserModel> {
-    const data = await this.post<User>(`/${this.ENTITY_NAME}`, user);
-    return new UserModel(data);
+  async create(user: Omit<User, 'id'>): Promise<User> {
+    try {
+      const data = await this.post<User>(`/${this.ENTITY_NAME}`, user);
+      return data;
+    } catch (error) {
+      this.handleApiError(error, this.ENTITY_NAME, 'crear usuario');
+      throw error;
+    }
   }
 
-  async update(id: number, user: Partial<User>): Promise<UserModel> {
-    const data = await this.put<User>(`/${this.ENTITY_NAME}/${id}`, user);
-    return new UserModel(data);
+  async update(id: number, user: Partial<User>): Promise<User> {
+    try {
+      const data = await this.put<User>(`/${this.ENTITY_NAME}/${id}`, user);
+      return data;
+    } catch (error) {
+      this.handleApiError(error, this.ENTITY_NAME, 'editar usuario');
+      throw error;
+    }
   }
 
-  async remove(id: number): Promise<void> {
-    await this.delete(`/${this.ENTITY_NAME}/${id}`);
+  async remove(id: number): Promise<User> {
+    try {
+      const data = await this.delete<User>(`/${this.ENTITY_NAME}/${id}`);
+      return data;
+    } catch (error) {
+      this.handleApiError(error, this.ENTITY_NAME, 'eliminar usuario');
+      throw error;
+    }
   }
 }
 

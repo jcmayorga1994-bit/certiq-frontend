@@ -19,7 +19,7 @@
                 </v-card-item>
 
                 <v-card-text>
-                    <v-form v-model="isFormValid" validate-on="submit lazy" @submit.prevent="handleLogin">
+                    <v-form v-model="isFormValid" @submit.prevent="handleLogin">
                         <v-text-field v-model="dataLogin.email" :rules="rules.requiredEmail"
                             label="Correo Electronico"></v-text-field>
                         <v-text-field v-model="dataLogin.password" :rules="rules.requiredPassword" label="Contraseña"
@@ -35,12 +35,13 @@
                         color="grey-darken-1" prepend-icon="mdi-google">
                         Continuar con Google
                     </v-btn>
+                    <br>
                     <p class="text-center">
-                        <ModalRegister />                       
-                    </p>                    
-                    <p class="text-center">                     
+                        <ModalRegister />
+                    </p>
+                    <p class="text-center">
                         <a href="">¿Olvidó su contraseña?</a>
-                    </p>                    
+                    </p>
                 </v-card-text>
 
                 <v-card-actions>
@@ -74,29 +75,31 @@ const errors = ref<{ [key: string]: string }>({})
 
 
 const handleLogin = async () => {
-  loading.value = true
-  errorMessage.value = ''
-  errors.value = {}
+    if (isFormValid.value) {
+        loading.value = true
+        errorMessage.value = ''
+        errors.value = {}
 
-  const result = await authStore.login(dataLogin.value)
+        const result = await authStore.login(dataLogin.value)
 
-  loading.value = false
+        loading.value = false
 
-  if (result?.success) {
-    router.push({ name: 'user.inicio' })
-  } else {
-    errorMessage.value = result?.message || 'Error al iniciar sesión'
-  }
+        if (result?.success) {
+            router.push({ name: 'user.inicio' })
+        } else {
+            errorMessage.value = result?.message || 'Error al iniciar sesión'
+        }
+    }
 }
 async function loginWithGoogle() {
-  try {
-    googleLoading.value = true
-    const response = await googleTokenLogin()
-    console.log('Google Login Success:', response)
-  } catch (error) {
-    console.error('Error en Google Login:', error)
-  } finally {
-    googleLoading.value = false
-  }
+    try {
+        googleLoading.value = true
+        const response = await googleTokenLogin()
+        console.log('Google Login Success:', response)
+    } catch (error) {
+        console.error('Error en Google Login:', error)
+    } finally {
+        googleLoading.value = false
+    }
 }
 </script>
