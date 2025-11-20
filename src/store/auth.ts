@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { User } from '@/models/user'
-import { AUTH_SERVICE } from '@/services/auth_service'
+import AuthService from '@/services/auth_service'
 
 interface AuthState {
     user: User | null
@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login({ email, password }: { email: string; password: string }) {
             try {
-                const response = await AUTH_SERVICE.login({
+                const response = await AuthService.login({
                     email,
                     password,
                 })                
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', {
 
         async register(data: { name: string; email: string; password: string; password_confirmation: string }) {
             try {
-                const response = await AUTH_SERVICE.register(data);
+                const response = await AuthService.register(data);
                 if (response.success) {
                     this.token = response.token
                     this.user = response.user
@@ -75,7 +75,7 @@ export const useAuthStore = defineStore('auth', {
         },
         async logout() {
             try {
-                await AUTH_SERVICE.logout();
+                await AuthService.logout();
             } catch (error) {
                 console.error('Error al cerrar sesión:', error)
             } finally {
@@ -90,7 +90,7 @@ export const useAuthStore = defineStore('auth', {
         },
         async fetchUser() {
             try {
-                const response = await AUTH_SERVICE.me();
+                const response = await AuthService.me();
                 if (response.success) {
                     this.user = response.user
                     this.isAuthenticated = true

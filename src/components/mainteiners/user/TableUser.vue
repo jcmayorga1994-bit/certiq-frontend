@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { USER_SERVICE } from '@/services/user_service';
+import { UserService } from '@/services/user_service';
 import { ref, onMounted } from 'vue';
 
 const loading = ref(false);
@@ -26,7 +26,7 @@ const headers = [
 onMounted(async () => {
   loading.value = true;
 
-  const response = await USER_SERVICE.getAll();
+  const response = await UserService.getAll();
   items.value = response.data;   // asumiendo user_service devuelve { data, total }
   total.value = response.total;
 

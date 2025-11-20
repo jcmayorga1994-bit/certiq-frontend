@@ -47,8 +47,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { validationRules } from '@/utils/validationRules'
 import { User } from '@/models/user'
-import { USER_SERVICE } from '@/services/user_service'
-import { AUTH_SERVICE } from '@/services/auth_service'
+import AuthService from '@/services/auth_service'
 
 const rules = validationRules
 const router = useRouter()
@@ -66,7 +65,7 @@ async function submit() {
     if (isFormValid.value) {
         try {
             loading.value = true
-            await AUTH_SERVICE.register(data_post_user.value)
+            await AuthService.register(data_post_user.value)
         } catch (error) {
             console.error(error);
                       
