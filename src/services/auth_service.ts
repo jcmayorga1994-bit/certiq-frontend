@@ -55,7 +55,18 @@ class AuthService extends BaseService<User>() {
       this.handleApiError(error, 'iniciar sesión');
     }
   }
-
+  static async loginGoogle(auth:{credential:string}): Promise<ResponseAuth> {
+    try {
+      return await this.submit<ResponseAuth>({
+        method: 'post',
+        path: `/public/auth/google`,
+        data: auth as any,
+        isFullPath: true,
+      });
+    } catch (error) {
+      this.handleApiError(error, 'iniciar sesión');
+    }
+  }
   static async me(): Promise<ResponseMe> {
     try {
       return await this.submit<ResponseMe>({

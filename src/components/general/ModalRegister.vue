@@ -67,8 +67,7 @@ async function submit() {
             loading.value = true
             await AuthService.register(data_post_user.value)
         } catch (error) {
-            console.error(error);
-                      
+            console.error(error);                      
         } finally {
             loading.value = false
         }

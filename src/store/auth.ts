@@ -51,7 +51,32 @@ export const useAuthStore = defineStore('auth', {
                 }
             }
         },
+        async loginGoogle(credential:string) {
+            try {
+                const response = await AuthService.loginGoogle({
+                    credential,
+                })                
+                if (response.success) {
+                    this.token = response.token
+                    this.user = response.user
+                    this.isAuthenticated = true
 
+                    // Guardar en localStorage
+                    localStorage.setItem('token', response.token)
+                    localStorage.setItem('user', JSON.stringify(response.user))
+
+                    // Configurar axios para usar el token
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+
+                    return { success: true }
+                }
+            } catch (error: any) {
+                return {
+                    success: false,
+                    message: error.response?.data?.message || 'Error al iniciar sesión',
+                }
+            }
+        },
         async register(data: { name: string; email: string; password: string; password_confirmation: string }) {
             try {
                 const response = await AuthService.register(data);

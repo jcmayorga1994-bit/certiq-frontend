@@ -22,9 +22,6 @@ app.use(vuetify)
 app.use(store)
 app.use(router)
 app.use(pinia)
-app.use(vue3GoogleLogin, {
-        clientId: '628906036129-gs3d52h8hfp9rfdp9s2fib8muq4l85o4.apps.googleusercontent.com'
-    })
 
 // Inicializar autenticación desde localStorage
 const authStore = useAuthStore()

@@ -31,10 +31,11 @@
                     <v-divider class="my-4"></v-divider>
 
                     <!-- Botón de Google -->
-                    <v-btn @click="loginWithGoogle" :loading="googleLoading" block variant="outlined"
+                    <!-- <v-btn @click="loginWithGoogle" :loading="googleLoading" block variant="outlined"
                         color="grey-darken-1" prepend-icon="mdi-google">
                         Continuar con Google
-                    </v-btn>
+                    </v-btn> -->
+                    <LoginGoogle></LoginGoogle>
                     <br>
                     <p class="text-center">
                         <ModalRegister />
@@ -61,6 +62,7 @@ import { validationRules } from '@/utils/validationRules'
 import { googleTokenLogin } from 'vue3-google-login'
 import ModalRegister from './ModalRegister.vue'
 import { useAuthStore } from '@/store/auth'
+import LoginGoogle from './LoginGoogle.vue'
 const authStore = useAuthStore()
 
 const router = useRouter()
@@ -89,17 +91,6 @@ const handleLogin = async () => {
         } else {
             errorMessage.value = result?.message || 'Error al iniciar sesión'
         }
-    }
-}
-async function loginWithGoogle() {
-    try {
-        googleLoading.value = true
-        const response = await googleTokenLogin()
-        console.log('Google Login Success:', response)
-    } catch (error) {
-        console.error('Error en Google Login:', error)
-    } finally {
-        googleLoading.value = false
     }
 }
 </script>
