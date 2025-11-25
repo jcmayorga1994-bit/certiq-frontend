@@ -70,7 +70,6 @@ const router = useRouter()
 const dataLogin = ref({ email: '', password: '' })
 const rules = validationRules
 const loading = ref(false)
-const googleLoading = ref(false)
 const isFormValid = ref(false)
 const errorMessage = ref('')
 const errors = ref<{ [key: string]: string }>({})

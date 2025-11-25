@@ -28,7 +28,6 @@
         <div v-if="resultado" :class="resultado.success ? 'success' : 'error'">
             {{ resultado.message }}
         </div>
-        <iframe src="http://127.0.0.1:8000/lessons/asdasd-3/contenido.html" style="width: 100%; height: 1000px;" ></iframe>
     </div>
 </template>
 

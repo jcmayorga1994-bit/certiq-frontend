@@ -61,7 +61,6 @@ import { ref } from "vue";
 import ModalLogin from "@/components/general/ModalLogin.vue";
 import SelectedCountry from "@/components/sideMenus/SelectedCountry.vue";
 import SideMenuPublic from "@/components/sideMenus/SideMenuPublic.vue";
-import { useRouter } from "vue-router";
 import { useAuthStore } from "@/store/auth";
 import SideMenuUser from "@/components/sideMenus/SideMenuUser.vue";
 import AlertNotification from '@/components/general/AlertNotification.vue'

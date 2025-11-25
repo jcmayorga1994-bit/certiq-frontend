@@ -9,6 +9,11 @@ const routes = [
     name: 'HomePublic',
     component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/HomePublic.vue')
   },
+  {
+    path: '/upload',
+    name: 'UploadHome',
+    component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/TestUpload.vue')
+  },
   ...userAuthenticate,
   ...administrator
   // ❌ Ruta 404 (fallback)

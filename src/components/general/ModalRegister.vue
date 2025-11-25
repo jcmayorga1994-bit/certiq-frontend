@@ -46,7 +46,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { validationRules } from '@/utils/validationRules'
-import { User } from '@/models/user'
 import AuthService from '@/services/auth_service'
 
 const rules = validationRules
