@@ -18,33 +18,39 @@ export const routes = [
         meta: { requiresAuth: true },
         children: [
             {
-                path: 'inicio',
-                name: 'user.inicio',
+                path: 'home',
+                name: 'user.home',
                 component: () => import('@/views/user/HomeView.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'my-lessons',
-                name: 'user.my-lessons',
-                component: () => import('@/views/user/MyLessonsView.vue'),
+                path: 'learn',
+                name: 'user.learn',
+                component: () => import('@/views/user/learn/LearnView.vue'),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'learn/content',
+                name: 'user.learn.content',
+                component: () => import('@/views/user/learn/ListLessonContentView.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'exam-simulation',
-                name: 'user.exam-simulation',
-                component: () => import('@/views/user/ExamSimulationView.vue'),
+                path: 'leaderboard',
+                name: 'user.leaderboard',
+                component: () => import('@/views/user/LeaderboardView.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'exam',
-                name: 'user.exam',
-                component: () => import('@/views/user/ExamsView.vue'),
+                path: 'practice',
+                name: 'user.practice',
+                component: () => import('@/views/user/PracticeView.vue'),
                 meta: { requiresAuth: true }
             },
             {
-                path: 'dashboard',
-                name: 'user.dashboard',
-                component: () => import('@/views/user/DashboardView.vue'),
+                path: 'settings',
+                name: 'user.settings',
+                component: () => import('@/views/user/ProfileView.vue'),
                 meta: { requiresAuth: true }
             }
         ]

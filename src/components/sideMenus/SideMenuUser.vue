@@ -45,42 +45,41 @@
 import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
-const route = useRoute();
 
 // Marca como activo si la ruta coincide
 const isActive = (name: string) => {
-    return route.name === name;
+    return router.name === name;
 };
 
 const items = [
     {
-        text: 'Inicio',
+        text: 'Home',
         icon: 'mdi-home',
         path: 'user.inicio',
         childrens: []
     },
     {
-        text: 'Mis Lecciones',
+        text: 'Learn',
         icon: 'mdi-book-open-page-variant',
-        path: 'user.my-lessons',
+        path: 'user.learn',
         childrens: []
     },
     {
-        text: 'Simulación de Exámenes',
+        text: 'Leaderboard',
         icon: 'mdi-pencil-ruler',
-        path: 'user.exam-simulation',
+        path: 'user.leaderboard',
         childrens: []
     },
     {
-        text: 'Exámenes',
+        text: 'Practice',
         icon: 'mdi-school',
-        path: 'user.exam',
+        path: 'user.practice',
         childrens: []
     },
     {
-        text: 'Dashboard',
+        text: 'Settings',
         icon: 'mdi-view-dashboard',
-        path: 'user.dashboard',
+        path: 'user.settings',
         childrens: []
     },
 ];
