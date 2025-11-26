@@ -1,3 +1,5 @@
+import { Lesson } from "./lesson";
+
 export interface LessonContent {
   id?: number | null;
   lesson_id:number;
@@ -6,7 +8,8 @@ export interface LessonContent {
   content_text:string;
   duration:number;
   language:string;
-  
+  content_json: any;
   slug:string;
-  content_url_html:string
+  content_url_html:string;
+  lesson?:Lesson | null;
 }

@@ -33,7 +33,15 @@ export const routes = [
                 path: 'learn/content',
                 name: 'user.learn.content',
                 component: () => import('@/views/user/learn/ListLessonContentView.vue'),
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true },
+                props: true
+            },
+            {
+                path: 'learn/content/feedback',
+                name: 'user.learn.feedback',
+                component: () => import('@/views/user/learn/FeedbackView.vue'),
+                meta: { requiresAuth: true },
+                props: true
             },
             {
                 path: 'leaderboard',

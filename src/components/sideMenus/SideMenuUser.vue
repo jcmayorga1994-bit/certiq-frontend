@@ -55,7 +55,7 @@ const items = [
     {
         text: 'Home',
         icon: 'mdi-home',
-        path: 'user.inicio',
+        path: 'user.home',
         childrens: []
     },
     {

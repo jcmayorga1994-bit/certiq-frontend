@@ -4,8 +4,7 @@
         :key="i" 
         class="mx-auto text-left" 
         prepend-icon="mdi-check-bold"
-        @click="router.push({ name: 'user.learn.content', query: { id: lesson.id }
- })"
+        @click="router.push({ name: 'user.learn.content', query: { id: lesson.id } })"
         :title="lesson.title">
     </v-card>
 </template>
