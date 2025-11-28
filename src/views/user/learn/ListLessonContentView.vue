@@ -22,17 +22,21 @@
                         <v-carousel-item v-for="(blocks, index) in lesson_content.content_json.lesson_json.blocks"
                             :key="index" cover>
                             <v-sheet class="ma-2 pa-2 me-auto mx-auto" max-width="1000" width="100%" rounded>
-                                {{ blocks.text }}
-                                <!-- DE MIENTRAS HASTA TENER LA ESTRUCTURA -->
-                                <div>
-                                    <strong>{{ lesson_content.content_json.lesson_json.quiz_blocks[0].explanation
-                                    }}</strong><br>
-                                    {{ lesson_content.content_json.lesson_json.quiz_blocks[0].question }}
-                                    <v-radio-group>
+                                <div v-if="blocks.type !='quiz_multiple_choice'">
+                                    {{ blocks.text }}
+                                </div>
+                                <div v-else>
+                                    <strong>{{ blocks.explanation }}</strong><br>
+                                    {{ blocks.question }}
+
+                                    <v-radio-group v-model="arrayResponse[index]">
                                         <v-radio
-                                            v-for="(x, i) in lesson_content.content_json.lesson_json.quiz_blocks[0].options"
-                                            :key="i" :label="x">
-                                        </v-radio>
+                                            v-for="(option, i) in blocks.options"
+                                            :key="i"
+                                            :label="option"
+                                            :value="option"
+                                            color="primary"
+                                        />
                                     </v-radio-group>
                                 </div>
                             </v-sheet>
@@ -57,7 +61,7 @@ const route = useRoute();
 const router = useRouter();
 const lesson_content = ref<LessonContent | null>(null)
 const carouselSelected = ref(0)
-
+const arrayResponse = ref<string[]>([])
 onMounted(async () => {
     lesson_content.value = await LessonContentService.getById(route.query.id);
 })

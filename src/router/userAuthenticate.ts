@@ -24,6 +24,12 @@ export const routes = [
                 meta: { requiresAuth: true }
             },
             {
+                path: 'my_certifications',
+                name: 'user.my_certifications',
+                component: () => import('@/views/user/certification/myCertificationsView.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
                 path: 'learn',
                 name: 'user.learn',
                 component: () => import('@/views/user/learn/LearnView.vue'),
