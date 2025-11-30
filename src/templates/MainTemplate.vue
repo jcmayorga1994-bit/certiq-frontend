@@ -67,7 +67,7 @@ import AlertNotification from '@/components/general/AlertNotification.vue'
 import CardLoginUser from "@/components/general/CardLoginUser.vue";
 
 const authStore = useAuthStore();
-const drawer = ref(true);
+const drawer = ref(false);
 
 
 </script>

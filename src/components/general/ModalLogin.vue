@@ -86,7 +86,7 @@ const handleLogin = async () => {
         loading.value = false
 
         if (result?.success) {
-            router.push({ name: 'user.inicio' })
+            router.push({ name: 'user.home' })
         } else {
             errorMessage.value = result?.message || 'Error al iniciar sesión'
         }

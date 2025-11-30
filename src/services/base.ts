@@ -8,10 +8,10 @@ interface ErrorData {
   [key: string]: any;
 }
 
-interface SubmitInterface<T> {
+interface SubmitInterface<TResponse, TRequest = unknown> {
   method: 'get' | 'post' | 'put' | 'delete';
   path: string;
-  data?: T | Record<string, unknown> | FormData | null ;
+  data?: TRequest | Record<string, unknown> | FormData | null;
   config?: AxiosRequestConfig | null;
   isFullPath?: boolean;
 }
@@ -139,18 +139,20 @@ export function BaseService<T>() {
         );
 
         // Relanzar un error más específico para el frontend
-          throw new Error(`Operación fallida al ${action} en ${this.entity}.`);
+        throw new Error(`Operación fallida al ${action} en ${this.entity}.`);
       } else {
         console.error(`[${this.entity}Service Error] Error desconocido al ${action}:`, error);
         throw error;
       }
-      
+
     }
 
     /**
      * Método principal para realizar peticiones AJAX
      */
-    static async submit<Type>(submitData: SubmitInterface<Type>): Promise<Type> {
+    static async submit<TResponse, TRequest = unknown>(
+      submitData: SubmitInterface<TResponse, TRequest>
+    ): Promise<TResponse> {
       try {
         const api = this.getApi();
         const path = submitData.isFullPath ? submitData.path : `${this.entity}/${submitData.path}`;

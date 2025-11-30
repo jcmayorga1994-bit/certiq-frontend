@@ -14,7 +14,7 @@ export const routes = [
     {
         path: '/user',
         component: () => import('@/layouts/EmptyRouterView.vue'),
-        redirect: { name: 'user.inicio' },
+        redirect: { name: 'user.home' },
         meta: { requiresAuth: true },
         children: [
             {
@@ -33,6 +33,7 @@ export const routes = [
                 path: 'learn',
                 name: 'user.learn',
                 component: () => import('@/views/user/learn/LearnView.vue'),
+                props: true,
                 meta: { requiresAuth: true },
             },
             {

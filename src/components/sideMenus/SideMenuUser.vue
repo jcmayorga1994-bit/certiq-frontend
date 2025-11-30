@@ -44,11 +44,12 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
 
 // Marca como activo si la ruta coincide
 const isActive = (name: string) => {
-    return router.name === name;
+    return route.name === name;
 };
 
 const items = [
@@ -61,7 +62,7 @@ const items = [
     {
         text: 'Learn',
         icon: 'mdi-book-open-page-variant',
-        path: 'user.learn',
+        path: 'user.my_certifications',
         childrens: []
     },
     {
