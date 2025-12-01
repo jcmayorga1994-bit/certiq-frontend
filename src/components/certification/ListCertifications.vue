@@ -46,14 +46,24 @@
 </template>
 <script setup>
 import { CertificationService } from '@/services/certificationService';
-import { Certification } from "@/models/certification"
+import { useLoaderStore } from '@/store/loader';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const certifications = ref([])
+const loaderStore = useLoaderStore();
 onMounted(async () => {
-    const response = await CertificationService.getAll();
-    certifications.value = response.data;
+    loaderStore.showLoader();
+    try {
+        const response = await CertificationService.getAll();
+        certifications.value = response.data;
+    } catch (error) {
+        console.log(error);
+        
+    } finally {
+        loaderStore.hideLoader();
+    }
+
 })
 </script>

@@ -40,6 +40,7 @@
     <v-main>
       <!-- <v-parallax src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"> -->
       <v-container fluid>
+          <LoaderComponent />
           <AlertNotification />
           <slot name="container"></slot>          
         </v-container>
@@ -65,7 +66,7 @@ import { useAuthStore } from "@/store/auth";
 import SideMenuUser from "@/components/sideMenus/SideMenuUser.vue";
 import AlertNotification from '@/components/general/AlertNotification.vue'
 import CardLoginUser from "@/components/general/CardLoginUser.vue";
-
+import LoaderComponent from "@/components/general/LoaderComponent.vue";
 const authStore = useAuthStore();
 const drawer = ref(false);
 
