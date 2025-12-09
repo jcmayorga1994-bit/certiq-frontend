@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes as administrator } from './administrator'
 import { routes as userAuthenticate } from './userAuthenticate'
+import { routes as publicRoutes } from './publicRoutes'
 import { useAuthStore } from '@/store/auth'
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "chunk-HomePublic" */ '@/views/TestUpload.vue')
   },
   ...userAuthenticate,
+  ...publicRoutes,  
   ...administrator
   // ❌ Ruta 404 (fallback)
   // {

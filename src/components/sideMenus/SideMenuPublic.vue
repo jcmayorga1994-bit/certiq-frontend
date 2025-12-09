@@ -1,66 +1,81 @@
 <template>
-  <v-list class="text-white bg-transparent" density="compact">
-    <v-list-group v-for="(item, i) in items" :key="i" :value="item.text">
-      <template v-slot:activator="{ props }">
+    <div v-for="(item, i) in items" :key="i">
+        
+        <!-- Ítems sin hijos -->
         <v-list-item
-          v-bind="props"
-          :title="item.text"
-          :prepend-icon="item.icon"
-          class="text-left"
-        ></v-list-item>
-      </template>
+            v-if="item.childrens.length === 0"
+            :title="item.text"
+            :prepend-icon="item.icon"
+            class="text-white bg-transparent text-left"
+            :active="isActive(item.path)"
+            @click="router.push({ name: item.path })"
+        />
 
-      <v-list-item
-        v-for="(children, j) in item.childrens"
-        :key="j"
-        :prepend-icon="children.icon"
-        :title="children.text"
-        :value="children.text"
-        class="text-left pl-8"
-      ></v-list-item>
-    </v-list-group>
-  </v-list>
+        <!-- Ítems con hijos -->
+        <v-list v-else class="text-white bg-transparent" density="compact">
+            <v-list-group :value="isActive(item.path)">
+                
+                <template #activator="{ props }">
+                    <v-list-item
+                        v-bind="props"
+                        :title="item.text"
+                        :prepend-icon="item.icon"
+                        class="text-left"
+                        :active="isActive(item.path)"
+                        @click="router.push({ name: item.path })"
+                    />
+                </template>
+
+                <v-list-item
+                    v-for="(children, j) in item.childrens"
+                    :key="j"
+                    :title="children.text"
+                    :prepend-icon="children.icon"
+                    :active="isActive(children.path)"
+                    class="text-left pl-8"
+                    @click="router.push({ name: children.path })"
+                />
+            </v-list-group>
+        </v-list>
+
+    </div>
 </template>
+<script setup lang="ts">
+import { useRouter, useRoute } from 'vue-router';
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+const route = useRoute();
+const router = useRouter();
 
-export default defineComponent({
-  name: "SideMenuPublic",
-  data() {
-    return {
-      items: [
+// Marca como activo si la ruta coincide
+const isActive = (name: string) => {
+    return route.name === name;
+};
+
+const items = [
         {
-          text: 'Nuestros cursos',
+          text: 'Courses',
           icon: 'mdi-book-open-page-variant',
-          childrens: [{
-            text: 'Todos los cursos',
-            icon: 'mdi-book-open-variant'
-          }]
-        },
-        {
-          text: 'Simulado',
-          icon: 'mdi-file-document',
+          path: 'home',
           childrens: []
         },
-        {
-          text: 'Certificación',
-          icon: 'mdi-certificate',
-          childrens: []
-        }
-      ]
-    }
-  },
-}) 
+        // {
+        //   text: 'Simulado',
+        //   icon: 'mdi-file-document',
+        //   childrens: []
+        // },
+        // {
+        //   text: 'Certificación',
+        //   icon: 'mdi-certificate',
+        //   childrens: []
+        // }
+      ];
 </script>
 
-<style scoped>
-/* Forzar alineación a la izquierda */
-:deep(.v-list-item__content) {
-  text-align: left !important;
-}
 
-:deep(.v-list-item-title) {
-  text-align: left !important;
+<style scoped>
+:deep(.v-list-item--active) {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-left: 3px solid #fff !important;
+    color: #fff !important;
 }
 </style>

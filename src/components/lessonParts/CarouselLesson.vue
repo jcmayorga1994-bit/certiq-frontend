@@ -116,6 +116,7 @@ const handleNext = (nextFunction: () => void) => {
 
 const handleFinish = () => {
     if (!isCurrentBlockQuizAndNotAnswered() && lesson_content.value) {
+        
         router.push({ name: 'user.learn.feedback', query: { id: lesson_content.value.id } });
     }
 }
